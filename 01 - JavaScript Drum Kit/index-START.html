@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  
+
+  <div class="keys">
+    <div data-key=65 id="key65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key=83 id="key83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key=68 id="key68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key=70 id="key70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key=71 id="key71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key=72 id="key72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key=74 id="key74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key=75 id="key75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key=76 id="key76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+  <audio data-key=65 id="audio65" src="sounds/clap.wav"></audio>
+  <audio data-key=83 id="audio83" src="sounds/hihat.wav"></audio>
+  <audio data-key=68 id="audio68" src="sounds/kick.wav"></audio>
+  <audio data-key=70 id="audio70" src="sounds/openhat.wav"></audio>
+  <audio data-key=71 id="audio71" src="sounds/boom.wav"></audio>
+  <audio data-key=72 id="audio72" src="sounds/ride.wav"></audio>
+  <audio data-key=74 id="audio74" src="sounds/snare.wav"></audio>
+  <audio data-key=75 id="audio75" src="sounds/tom.wav"></audio>
+  <audio data-key=76 id="audio76" src="sounds/tink.wav"></audio>
+
+  <script>
+    function play(event) {
+      let keyboard = event.keyCode;
+      if (keyboard === 65 || keyboard === 83 || keyboard === 68 || keyboard ===70 || keyboard ===71 || keyboard ===72 || keyboard ===74 || keyboard ===75 || keyboard ===76) {
+      document.getElementById("key" + keyboard).setAttribute('class', 'playing');
+      document.getElementById("audio" + keyboard).play();
+      // document.querySelector('div[data-key="' + num + '"]').setAttribute('class', 'playing');
+      // document.querySelector('audio[data-key="' + num + '"]').play();
+      };
+    };
+
+    function stop(event) {
+      var keyboard = event.keyCode;
+      if (keyboard === 65 || keyboard === 83 || keyboard === 68 || keyboard ===70 || keyboard ===71 || keyboard ===72 || keyboard ===74 || keyboard ===75 || keyboard ===76) {
+      document.getElementById("key" + keyboard).setAttribute('class', 'key');
+      document.getElementById("audio" + keyboard).load();
+      // document.querySelector('div[data-key="' + num + '"]').setAttribute('class', 'key');
+      // document.querySelector('audio[data-key="' + num + '"]').load();
+      };
+    }; 
+    window.addEventListener('keydown', play);
+    window.addEventListener('keyup', stop);
+  </script>
+
+
+</body>
+
+</html>
