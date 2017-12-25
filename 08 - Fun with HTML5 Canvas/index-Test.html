@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="draw"></canvas>
+  <script>
+    var canvas = document.querySelector('#draw');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    canvas.addEventListener('mousedown', checkClick);
+    canvas.addEventListener('mouseup', removeClick);
+
+    function checkClick(event) {
+      canvas.addEventListener('mousemove', createCircle);
+    };
+
+    function removeClick(event) {
+      canvas.removeEventListener('mousemove', createCircle);
+    };
+
+    var hue = 0;
+    var increase = true;
+    var radius = 1;
+
+    function createCircle(e) {
+      var getContext = canvas.getContext('2d');
+      console.log(e)
+      var xCoordinate = e.offsetX;
+      var yCoordinate = e.offsetY;
+      getContext.beginPath();
+      getContext.arc(xCoordinate, yCoordinate, radius, 0, 2 * Math.PI);
+      getContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
+      getContext.fill();
+      hue++;
+      
+      if(radius >= 40  || radius <1) {
+        increase = !increase;
+      };
+
+      if(increase) {
+        radius++;
+      } else {
+        radius--;
+      }
+
+    };
+  </script>
+
+
+
+</body>
+
+</html>
