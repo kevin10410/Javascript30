@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>HTML5 Canvas</title>
   <style>
-      html, body {
-        margin:0;
-      }
-    </style>
+    html,body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
+
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
-<script>
-const canvas = document.querySelector('#draw');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-ctx.strokeStyle = '#BADA55';
-ctx.lineJoin = 'round';
-ctx.lineCap = 'round';
-ctx.lineWidth = 100;
-// ctx.globalCompositeOperation = 'multiply';
+  <canvas id="draw" width="window.innerWidth" height="window.innerHeight"></canvas>
+  <script>
+    var canvas = document.querySelector('#draw');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-let isDrawing = false;
-let lastX = 0;
-let lastY = 0;
-let hue = 0;
-let direction = true;
+    canvas.addEventListener('mousedown', checkClick);
+    canvas.addEventListener('mouseup', removeClick);
 
-function draw(e) {
-  if (!isDrawing) return; // stop the fn from running when they are not moused down
-  console.log(e);
-  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-  var xCoordinate = e.offsetX;
-  var yCoordinate = e.offsetY;
-  ctx.beginPath();
-  // start from
-  ctx.moveTo(lastX, lastY);
-  // go to
-  ctx.lineTo(xCoordinate, yCoordinate);
-  ctx.stroke();
-  [lastX, lastY] = [xCoordinate, yCoordinate];
+    function checkClick(e) {
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+      canvas.addEventListener('mousemove', createCircle);
+    };
 
-  hue++;
-  if (hue >= 360) {
-    hue = 0;
-  }
-  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
-    direction = !direction;
-  }
+    function removeClick(event) {
+      canvas.removeEventListener('mousemove', createCircle);
+    };
 
-  if(direction) {
-    ctx.lineWidth++;
-  } else {
-    ctx.lineWidth--;
-  }
+    var hue = 0;
+    var increase = true;
+    var radius = 1;
+    lastX = 0;
+    lastY = 0;
 
-}
+    function createCircle(e) {
+      
+      var getContext = canvas.getContext('2d');
+      console.log(e)
+      var newX = e.offsetX;
+      var newY = e.offsetY;
+      getContext.beginPath();
+      getContext.moveTo(lastX, lastY);
+      getContext.lineTo(newX, newY);
+      getContext.lineWidth = radius;
+      getContext.lineCap = 'round';
+      // getContext.lineJoin = 'round';
+      getContext.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      getContext.stroke();
+      lastX = e.offsetX;
+      lastY = e.offsetY;
+      hue++;
+      
+      if(radius >= 100  || radius <1) {
+        increase = !increase;
+      };
 
-canvas.addEventListener('mousedown', (e) => {
-  isDrawing = true;
-  [lastX, lastY] = [e.offsetX, e.offsetY];
-});
+      if(increase) {
+        radius++;
+      } else {
+        radius--;
+      }
 
-
-canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('mouseup', () => isDrawing = false);
-canvas.addEventListener('mouseout', () => isDrawing = false);
-
-</script>
+    };
+  </script>
 
 
 
 </body>
+
 </html>
