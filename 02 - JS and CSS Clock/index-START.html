@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div id = "hour-hand" class="hand"></div>
+        <div id = "min-hand" class="hand"></div>
+        <div id = "second-hand" class="hand "></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+      background-size:cover;
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border:20px solid white;
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      height:6px;
+      position: absolute;
+      top:50%;
+      
+    }
+
+    .clock .clock-face #hour-hand{
+      width:30%;
+      background:red;
+      transform-origin: 100% 50%;
+      left:20%;
+      
+    }
+
+    .clock .clock-face #min-hand{
+      width:40%;
+      background:blue;
+      transform-origin: 100% 50%;
+      left:10%;
+    }
+
+    .clock .clock-face #second-hand{
+      width:50%;
+      background:yellow;
+      transform-origin: 100% 50%;
+      transition: transform 1s;
+      transition-timing-function: linear;
+
+    }
+
+  </style>
+
+  <script>
+  
+    function getAngle () {
+      var time = new Date();
+      var currentHour = time.getHours();
+      var currentMinute = time.getMinutes();
+      var currentSecond = time.getSeconds();
+     
+      var hourAngle = currentHour*30 + 90;
+      var minAngle = currentMinute*6 + 90;
+      var secondAngle = currentSecond*6 + 90;
+
+      console.log(currentHour);
+      console.log("hour" + hourAngle);
+      console.log(currentMinute);
+      console.log("min" + minAngle);
+      console.log(currentSecond);
+      console.log("sec" + secondAngle);
+
+      document.getElementById('hour-hand').style.transform = 'rotate(' + hourAngle + 'deg)';
+      document.getElementById('min-hand').style.transform = 'rotate(' + minAngle + 'deg)';
+      document.getElementById('second-hand').style.transform = 'rotate(' + secondAngle + 'deg)';
+    };
+    
+    getAngle();
+    window.setInterval(getAngle, 1000);
+    
+
+  </script>
+</body>
+</html>
