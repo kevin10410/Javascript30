@@ -109,14 +109,14 @@
       textArray.push(text);
     });
 
-    console.log(textArray);
+    // console.log(textArray);
 
-    checkInput.forEach(function(input){
+    checkInput.forEach(function (input) {
       input.addEventListener('click', selectMany);
     });
 
 
-    var lastOrder=0;
+    var lastOrder = 0;
     var lastIndex;
 
     function selectMany(e) {
@@ -124,23 +124,27 @@
       var relatedString = e.target.nextElementSibling;
       var checkOrder = textArray.indexOf(relatedString.innerText);
       if (e.shiftKey === true && checkTag === 'INPUT') {
-        if (checkOrder > lastOrder) {
-          for (i = lastOrder; i < checkOrder; i++) {
-            if (checkInput[i].checked !== true) {
-              checkInput[i].checked = true;
-            };
-          };
-        } else {
-          for (i = checkOrder; i < lastOrder; i++) {
-            if (checkInput[i].checked !== true) {
-              checkInput[i].checked = true;
-            };
-          };
-        };
+        checked(checkOrder);
       };
       lastIndex = e.target.nextElementSibling.innerText;
       lastOrder = textArray.indexOf(lastIndex);
       console.log(lastIndex);
+    };
+
+    function checked(checkOrder) {
+      if (checkOrder > lastOrder) {
+        for (i = lastOrder; i < checkOrder; i++) {
+          if (checkInput[i].checked !== true) {
+            checkInput[i].checked = true;
+          };
+        };
+      } else {
+        for (i = checkOrder; i < lastOrder; i++) {
+          if (checkInput[i].checked !== true) {
+            checkInput[i].checked = true;
+          };
+        };
+      };
     };
 
   </script>
