@@ -98,51 +98,34 @@
   </div>
 
   <script>
-    var checkBox = document.querySelectorAll('p');
-    var checkInput = document.querySelectorAll('input');
-    console.log(checkBox);
-
-    var textArray = [];
-
-    checkBox.forEach(function (item) {
-      var text = item.innerText;
-      textArray.push(text);
-    });
-
-    // console.log(textArray);
+    let checkInput = document.querySelectorAll('input');
+    let InputArray = Array.from(checkInput);
+    console.log(InputArray);
 
     checkInput.forEach(function (input) {
       input.addEventListener('click', selectMany);
     });
 
-
-    var lastOrder = 0;
-    var lastIndex;
+    let lastOrder = 0;
 
     function selectMany(e) {
-      var checkTag = e.target.tagName;
-      var relatedString = e.target.nextElementSibling;
-      var checkOrder = textArray.indexOf(relatedString.innerText);
-      if (e.shiftKey === true && checkTag === 'INPUT') {
+      var test = e.target;
+      console.log(InputArray.indexOf(test));
+      var checkOrder = InputArray.indexOf(test);
+      if (e.shiftKey === true) {
         checked(checkOrder);
       };
-      lastIndex = e.target.nextElementSibling.innerText;
-      lastOrder = textArray.indexOf(lastIndex);
-      console.log(lastIndex);
+      lastOrder = checkOrder;
     };
 
     function checked(checkOrder) {
       if (checkOrder > lastOrder) {
         for (i = lastOrder; i < checkOrder; i++) {
-          if (checkInput[i].checked !== true) {
-            checkInput[i].checked = true;
-          };
+          checkInput[i].checked = true;
         };
       } else {
         for (i = checkOrder; i < lastOrder; i++) {
-          if (checkInput[i].checked !== true) {
-            checkInput[i].checked = true;
-          };
+          checkInput[i].checked = true;
         };
       };
     };
