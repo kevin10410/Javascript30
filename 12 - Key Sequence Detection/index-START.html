@@ -9,28 +9,26 @@
 
 <body>
   <script>
+    cornify_count = 0;
+
     let checkArray = [];
     let secretCode = 'wesbos'
     window.addEventListener('keydown', checkStart);
-    function checkStart(e) {
+    function checkStart(event) {
       if (checkArray.length < 6) {
-        checkArray.push(e.key);       
+        checkArray.push(event.key);
       } else {
         checkArray.shift();
-        checkArray.push(e.key);
+        checkArray.push(event.key);
       };
 
-      var checkCode = checkArray.join('');
-      var test = checkArray.toString();
+      let checkCode = checkArray.join('');
       console.log(checkCode);
-      console.log(test);
-
       if (checkCode === secretCode) {
         console.log('Goal!!!');
-        cornify_count = 0;
         cornify_add();
-      }
-    }
+      };
+    };
 
 
 
