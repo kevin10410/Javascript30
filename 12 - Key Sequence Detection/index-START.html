@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+  <script>
+    var checkArray = [];
+    const secretCode = 'wesbos'
+    window.addEventListener('keydown', checkStart);
+    function checkStart(e) {
+      if (checkArray.length < 6) {
+        checkArray.push(e.key);       
+      } else {
+        checkArray.shift();
+        checkArray.push(e.key);
+      };
+
+      var checkCode = checkArray.join('');
+      var test = checkArray.toString();
+      console.log(checkCode);
+      console.log(test);
+
+      if (checkCode === secretCode) {
+        console.log('Goal!!!');
+        cornify_add();
+      }
+    }
+
+
+
+  </script>
+</body>
+
+</html>
