@@ -15,7 +15,8 @@ selectVideo.addEventListener('click', playToggle);
 // rateSlide.addEventListener('input', changeRate);
 inputItem.forEach(function(item){
     item.addEventListener('input', changeCondition);
-})
+});
+
 skipButton.forEach(function(button){
     button.addEventListener('click', skipVideo)
 });
@@ -36,51 +37,35 @@ function playToggle() {
     }
 };
 
-function changeVolume(e) {
-    let currentVolume = e.target.value;
-    selectVideo.volume = currentVolume;
-    // console.log(e.target);
+function changeCondition (event) {
+    let changeInput = event.target;
+    let conditionName = changeInput.name;
+    let conditionValue = changeInput.value;
+    selectVideo[conditionName] = conditionValue;   
 };
 
-function changeRate(e) {
-    let currentRate = e.target.value;
-    selectVideo.playbackRate = currentRate;
-    // console.log(currentRate);
-};
 
-function changeCondition (e) {
-    //this = e.target
-    var conditionName = this.name;
-    var conditionValue = this.value;
-    selectVideo[conditionName] = conditionValue;
-     
-}
-
-
-function skipVideo(e) {
-    let changeTime = parseInt(e.target.dataset.skip);
+function skipVideo(event) {
+    let changeTime = parseInt(event.target.dataset.skip);
     console.log(changeTime);
     selectVideo.currentTime += changeTime;
-}
+};
 
 function progressing() {
     let videoDuration = selectVideo.duration;
     let currentPosition = selectVideo.currentTime;
     currentProgress = currentPosition / videoDuration * 100;
     progressBarIn.style.flexBasis = `${currentProgress}%`;
-    // console.log(currentProgress);
 };
 
 function addDragProgress (e) {
-    console.log(e);
-    progressBarOut.addEventListener('click', dragProgressBar);
+    progressBarOut.addEventListener('mousedown', dragProgressBar);
     progressBarOut.addEventListener('mousemove', dragProgressBar);
 };
 
 function removeDragProgress () {
     progressBarOut.removeEventListener('mousemove', dragProgressBar);
 };
-
 
 function dragProgressBar (e) {
     console.log(e);
@@ -90,16 +75,10 @@ function dragProgressBar (e) {
     let videoProgress = mouseX / progressBarWidth;
     let newPosition = videoDuration * videoProgress;
     selectVideo.currentTime = newPosition;
-    console.log(videoDuration);
-    console.log(videoProgress);
-    console.log(newPosition);
 };
 
-
-window.addEventListener('keydown', keyboardFunction);
-
-
 /*===========Add Keyboard Event===========*/
+window.addEventListener('keydown', keyboardFunction);
 
 function keyboardFunction(e) {
     e.preventDefault();
@@ -130,7 +109,7 @@ function keyboardFunction(e) {
     if (e.keyCode === 32) {
         playToggle();
     };
-}
+};
 
 
 
