@@ -31,6 +31,7 @@
   </svg>
 
   <div class="wrapper">
+    <button id = 'clear'>X</button>
     <h2>LOCAL TAPAS</h2>
     <p></p>
     <ul class="plates">
@@ -56,6 +57,7 @@
     };
 
     addItems.addEventListener('submit', addItem);
+    document.getElementById('clear').addEventListener('click', clear);
 
 
     function addItem(event) {
@@ -67,7 +69,7 @@
       localStorage.setItem(`item`, stringJson);
       console.log(localStorage);
       inputArea.value = '';
-      createlist()
+      createlist();
     };
 
     function createlist() {
@@ -104,6 +106,12 @@
       localStorage.setItem(`item`, stringJson);
       createlist();
     };
+
+    function clear () {
+      localStorage.clear();
+      storageArray = [];
+      itemsList.innerHTML = '<li>Loading Tapas...</li>';
+    }
 
     createlist();
   </script>
