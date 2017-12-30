@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+  <style>
+    html {
+      color: black;
+      font-family: sans-serif;
+    }
+
+    body {
+      margin: 0px;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+    }
+
+    h1 {
+      /* text-shadow: 100px 0px 0 rgba(0, 0, 0, 1),-100px 0px 0 rgba(0, 0, 0, 1),0px 100px 0 rgba(0, 0, 0, 1),0px -100px 0 rgba(0, 0, 0, 1); */
+      font-size: 100px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+    <h1 contenteditable>🔥影分身之術!!</h1>
+  </div>
+
+  <script>
+    let shadowElement = document.querySelector('h1');
+
+    window.addEventListener('mousemove', shadowEffect);
+
+    function shadowEffect (event) {
+      
+      let mouseX = event.clientX;
+      let mouseY = event.clientY;
+      let centerX = window.innerWidth/2;
+      let centerY = window.innerHeight/2;
+      let moveX = centerX - mouseX;
+      let moveY = centerY - mouseY;
+      shadowElement.style.textShadow = `${moveX}px ${-moveY}px 0 rgba(255,0,255,0.7), ${-moveX}px ${moveY}px 0 rgba(0,255,255,0.7),${-moveY}px ${-moveX}px 0 rgba(0,255,0,0.7),${moveY}px ${moveX}px 0 rgba(0,0,255,0.7)`;
+    };
+  </script>
+</body>
+
+</html>
