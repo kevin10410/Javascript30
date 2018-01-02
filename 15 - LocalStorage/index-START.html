@@ -98,11 +98,12 @@
       let allLable = document.querySelectorAll('label');
       labelArray = Array.from(allLable);
       let getIndex = labelArray.indexOf(event.target);
-      let arrayJason = JSON.parse(localStorage.getItem('item'));
-      console.log(!arrayJason[getIndex]['done']);
-      arrayJason[getIndex]['done'] = !arrayJason[getIndex]['done'];
-      stringJson = JSON.stringify(arrayJason);
-      localStorage.setItem(`item`, stringJson);
+      let arrayCheck = JSON.parse(localStorage.getItem('item'));
+      storageArray[getIndex]['done'] = !storageArray[getIndex]['done'];
+      arrayCheck[getIndex]['done'] = !arrayCheck[getIndex]['done'];
+      stringCheck = JSON.stringify(arrayCheck);
+      localStorage.setItem(`item`, stringCheck);
+      console.log(localStorage)
       createlist();
     };
 

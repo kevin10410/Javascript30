@@ -12,7 +12,7 @@ function getVideo() {
       video.play();
     })
     .catch(err => {
-      console.error(`OH NO!!!`, err);
+      window.alert(`OH~ No camera!!!`);
     });
 };
 
@@ -23,11 +23,9 @@ function RGBMode() {
   canvas.height = height;
   let painting =  setInterval(() => {
     ctx.drawImage(video, 0, 0, width, height);
-    // take the pixels out
     let pixels = ctx.getImageData(0, 0, width, height);
 
     pixels = rgbSplit(pixels);
-    // put them back
     ctx.putImageData(pixels, 0, 0);
   }, 16);
   return painting;

@@ -12,7 +12,7 @@ function getVideo() {
       video.play();
     })
     .catch(err => {
-      console.error(`OH NO!!!`, err);
+      window.alert(`OH~ No camera!!!`);
     });
 };
 
@@ -44,12 +44,9 @@ function takePhoto() {
 
 function greenScreen(pixels) {
   const levels = {};
-
   document.querySelectorAll('.rgb input').forEach((input) => {
     levels[input.name] = input.value;
   });
-
-
   for (i = 0; i < pixels.data.length; i = i + 4) {
     red = pixels.data[i + 0];
     green = pixels.data[i + 1];

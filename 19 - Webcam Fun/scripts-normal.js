@@ -7,14 +7,14 @@ const snap = document.querySelector('.snap');
 function getVideo() {
   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
     .then(localMediaStream => {
-      console.log(localMediaStream);
       video.src = window.URL.createObjectURL(localMediaStream);
       video.play();
     })
     .catch(err => {
-      console.error(`OH NO!!!`, err);
+      window.alert(`OH~ No camera!!!`);
     });
 };
+
 
 function normalMode() {
   const width = video.videoWidth;
@@ -22,11 +22,7 @@ function normalMode() {
   canvas.width = width;
   canvas.height = height;
   let painting =  setInterval(() => {
-    ctx.drawImage(video, 0, 0, width, height);
-    // take the pixels out
-    let pixels = ctx.getImageData(0, 0, width, height);
-    // put them back
-    ctx.putImageData(pixels, 0, 0);
+  ctx.drawImage(video, 0, 0, width, height);
   }, 16);
   return painting;
 };
