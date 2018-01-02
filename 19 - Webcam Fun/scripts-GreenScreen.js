@@ -16,43 +16,7 @@ function getVideo() {
     });
 };
 
-function normalMode() {
-  // window.clearInterval(painting);
-  const width = video.videoWidth;
-  const height = video.videoHeight;
-  canvas.width = width;
-  canvas.height = height;
-  let painting =  setInterval(() => {
-    ctx.drawImage(video, 0, 0, width, height);
-    // take the pixels out
-    let pixels = ctx.getImageData(0, 0, width, height);
-    pixels = greenScreen(pixels);
-    // put them back
-    ctx.putImageData(pixels, 0, 0);
-  }, 16);
-  return painting;
-};
-
-function RGBMode() {
-  window.clearInterval(painting);
-  const width = video.videoWidth;
-  const height = video.videoHeight;
-  canvas.width = width;
-  canvas.height = height;
-  let painting =  setInterval(() => {
-    ctx.drawImage(video, 0, 0, width, height);
-    // take the pixels out
-    let pixels = ctx.getImageData(0, 0, width, height);
-
-    pixels = rgbSplit(pixels);
-    // put them back
-    ctx.putImageData(pixels, 0, 0);
-  }, 16);
-  return painting;
-};
-
 function greenScreenMode() {
-  window.clearInterval(painting);
   const width = video.videoWidth;
   const height = video.videoHeight;
   canvas.width = width;
@@ -66,7 +30,7 @@ function greenScreenMode() {
     ctx.putImageData(pixels, 0, 0);
   }, 16);
   return painting;
-};
+}
 
 function takePhoto() {
   // take the data out of the canvas
@@ -76,25 +40,7 @@ function takePhoto() {
   link.setAttribute('download', 'handsome');
   link.innerHTML = `<img src="${data}" alt="Handsome Man" />`;
   strip.insertBefore(link, strip.firsChild);
-}
-
-function redEffect(pixels) {
-  for(let i = 0; i < pixels.data.length; i+=4) {
-    pixels.data[i + 0] = pixels.data[i + 0] + 200; // RED
-    pixels.data[i + 1] = pixels.data[i + 1] - 50; // GREEN
-    pixels.data[i + 2] = pixels.data[i + 2] * 0.5; // Blue
-  }
-  return pixels;
-}
-
-function rgbSplit(pixels) {
-  for(let i = 0; i < pixels.data.length; i+=4) {
-    pixels.data[i - 150] = pixels.data[i + 0]; // RED
-    pixels.data[i + 500] = pixels.data[i + 1]; // GREEN
-    pixels.data[i - 550] = pixels.data[i + 2]; // Blue
-  }
-  return pixels;
-}
+};
 
 function greenScreen(pixels) {
   const levels = {};
@@ -125,7 +71,4 @@ function greenScreen(pixels) {
 
 getVideo();
 
-video.addEventListener('canplay', normalMode);
-document.getElementById('normal').addEventListener('click', normalMode);
-document.getElementById('RGB').addEventListener('click', RGBMode);
-document.getElementById('greenScreen').addEventListener('click', greenScreenMode);
+video.addEventListener('canplay', greenScreenMode);
