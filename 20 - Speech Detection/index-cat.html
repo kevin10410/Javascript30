@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Detection</title>
+</head>
+<style>
+  body {
+    background: #ffc600;
+    font-family: 'helvetica neue';
+    font-weight: 200;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  div {
+    top: 100px;
+    width: 400px;
+    height: 300px;
+    margin: auto;
+    background: white;
+    position: relative;
+    perspective: 350px;
+  }
+
+  .text {
+    margin: auto;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+  }
+
+  #cat {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    transition: 1s linear;
+  }
+
+  #cat2 {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    transition: 1s linear;
+  }
+
+  .active #cat {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    transition: 1s linear;
+  }
+
+  .active #cat2 {
+    position: absolute;
+    width: 400px;
+    height: 300px;
+    backface-visibility: hidden;
+    transform: rotateY(360deg);
+    transition: 1s linear;
+  }
+</style>
+
+<body>
+
+  <div class='holder'>
+    <img id="cat2" src=cat.jpg></img>
+    <img id="cat" src=cat2.png></img>
+  </div>
+  <div class = 'text'>貓咪生氣氣 快跟他說'來'</div>
+
+  <script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const cat = document.querySelector('img');
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
+
+    recognition.addEventListener('result', translateSound);
+
+    function translateSound(event) {
+      let dataArray = Array.from(event.results);
+      let text = dataArray[0][0]['transcript'];
+      console.log(text);
+      if (text === '來') {
+        document.querySelector('div').setAttribute('class', 'active');
+        document.querySelector('.text').innerHTML = `鐵人文章快寫不完 快叫他'回去'!`;
+      };
+      if (text === '回去') {
+        document.querySelector('div').removeAttribute('class');
+        document.querySelector('.text').innerHTML = `貓咪生氣氣 快跟他說'來'!`;
+      }
+    };
+
+    recognition.start();
+    recognition.addEventListener('end', recognition.start);
+
+  </script>
+</body>
+
+</html>
