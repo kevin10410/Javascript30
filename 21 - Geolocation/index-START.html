@@ -85,13 +85,9 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
-    const arrow = document.querySelector('.arrow');
-    const speed = document.querySelector('.speed-value');
     const text = document.querySelector('.position');
     const button = document.querySelector('button');
-
-
-
+    
     function getPosition() {
       navigator.geolocation.getCurrentPosition(function (data) {
         let latitude = data.coords.latitude;
