@@ -88,7 +88,7 @@
     function translateSound(event) {
       let dataArray = Array.from(event.results);
       let text = dataArray[0][0]['transcript'];
-      console.log(text);
+      console.log(event.results);
       if (text === '來') {
         document.querySelector('div').setAttribute('class', 'active');
         document.querySelector('.text').innerHTML = `鐵人文章快寫不完 快叫他'回去'!`;
