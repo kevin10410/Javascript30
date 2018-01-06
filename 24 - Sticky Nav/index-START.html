@@ -61,8 +61,7 @@
   const logo = document.querySelector('.logo');
 
   function stick (event) {
-    let headerClientRect = header.getBoundingClientRect();
-    const condition = headerClientRect.height;
+    const condition = header.offsetHeight;
     if (window.scrollY >= condition) {
       navbar.style.position = 'fixed';
       document.body.style.paddingTop = navbar.offsetHeight+'px';
