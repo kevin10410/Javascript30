@@ -69,7 +69,7 @@
 
     function score(event) {
       console.log(event);
-      // if(!event.isTrusted) return;
+      if(!event.isTrusted) return;
       currentScore++;
       scoreBoard.innerHTML = currentScore;
       this.parentNode.classList.remove('up'); 
