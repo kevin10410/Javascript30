@@ -79,7 +79,7 @@ input.addEventListener('submit', setInputTime);
 
 function setInputTime(event) {
     event.preventDefault();
-    let inputValue = parseInt(this.querySelector('input').value);
+    let inputValue = this.querySelector('input').value;
     if (isNaN(inputValue)) {
         window.alert('請輸入數字！！')
     } else {
